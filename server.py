@@ -3,6 +3,8 @@ from qiskit import QuantumCircuit, assemble, Aer
 
 app = Flask(__name__)
 
+qc=0
+
 def getResults(qc):
 	sim = Aer.get_backend('aer_simulator') 
 	result = sim.run(qc).result()
@@ -11,23 +13,24 @@ def getResults(qc):
 
 def measureStandard(qc, bit):
 	qc.measure(bit,bit)		# outputs measurement of qbit0 to cbit0
-	qc.measure(1,1)			# outputs measurement of qbit1 to cbit1
 
-def measureHadamard(qc):
-	qc.measure()
-
-def createQubits(qc):
+def measureHadamard(qc, bit):
 	qc.h(0)
-	pass
+	qc.measure(bit,bit)
 
-def createCircuit():
-	qc = QuantumCircuit(2,2)	# 2 quantum bits, 2 classical bits
+def createCircuit(size):
+	qc = QuantumCircuit(size,size)	# 2 quantum bits, 2 classical bits
 	return qc
 
-@app.route("/")
-def hello_world():
-	qc = createCircuit()
+@app.route("/<size>")
+def initializeCircuit(size):
+	qc = createCircuit(int(size))
 	qc.h(0)
+	qc.h(1)
 	measureStandard(qc, 0)
+	measureHadamard(qc, 1)
+	measureStandard(qc, 2)
+	measureHadamard(qc, 3)
 	return getResults(qc)
+
 
