@@ -10,10 +10,10 @@ circuits = []
 qubits = []
 
 #get count results of circuit q
-def getCounts(q):
-	result = sim.run(q).result()
-	counts = result.get_counts()
-	return counts
+#def getCounts(q):
+#	result = sim.run(q).result()
+#	counts = result.get_counts()
+#	return counts
 	
 #classical binary bitstring length n
 def randomBitstring(n):
@@ -33,7 +33,6 @@ def qubitString(a,b):
 		return "+"
 	elif a=="1" and b=="1":
 		return "-"
-	return
 
 
 # APIS to implement
@@ -55,10 +54,11 @@ def generateAlice(n):
 			q.x(0)
 		if(int(b[i])==1):
 			q.h(0)
+
 		qubits[i] = qubitString(a[i],b[i])
-	# print(a)
-	# print(b)
-	# print(qubits)
+	print(a)
+	print(b)
+	print(qubits)
 	return {
 		"a": a,
 		"b": b,
@@ -70,39 +70,45 @@ def generateAlice(n):
 @app.route('/measureQubit/<int:index>/<int:basis>')
 def measureQubit(index, basis):
 	q = circuits[index]
-	result = sim.run(q).result()
-	vector = result.get_statevector()
-	# print(vector)
-	# print(index)
-	# print(qubits)
-	# print(qubits[index])
-	# print(qubitString(vector))
+	print(q)
 	if basis==1:
 		q.h(0)
+	
 	q.measure(0,0)
+
+	#my understanding is that we apply Hadamard again to return qubit back to original state after measuring in the +/- basis
+	#please correct if I am wrong
 	if basis==1:
 		q.h(0)
-	results = getCounts(q)
-	# print(results)
-	res="1"
-	if len(results.keys())>1:
-		res=list(results.keys())[randint(0,1)]
-	elif list(results.keys())[0]=="0":
-		res="0"
+
+
+	print(q)
+	#run one simulation to measure
+	result = sim.run(q, shots=1, memory=True).result()
+	memory = result.get_memory(q)[0]
+	print(memory)
+	
 	if basis==0:
-		return res
+		return memory
 	else:
-		return "+" if res=="1" else "-"
+		return "+" if memory=="0" else "-"
 
 # first randomly generate b', then measures all the qubits.
 # return b' as string, measurement outcome as array of strings.
 def measureBob(n): 
 	b2 = randomBitstring(n)
+	print(b2)
 	result=[""]*n
 	for i in range(n):
 		q = circuits[i]
-		result[i]=getCounts(q)[0]
-	return (b2, result)
+		result[i]=measureQubit(i, int(b2[i]))
+
+	print(result)
+
+	return {
+		"b2": b2, 
+		"result": result
+	}
 
 
 def sendBases(isBob):
@@ -114,3 +120,5 @@ def drop(indices):
 
 
 
+generateAlice(5)
+measureBob(5)
