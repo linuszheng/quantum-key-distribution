@@ -32,7 +32,6 @@ def generateRandom(size):
 		if y==1:
 			qc.h(i)
 
-@app.route("/<size>")
 def initializeCircuit(size):
 	qc = createCircuit(int(size))
 	qc.h(0)
@@ -42,5 +41,6 @@ def initializeCircuit(size):
 	measureStandard(2)
 	measureHadamard(3)
 	return getResults(qc)
+
 
 
