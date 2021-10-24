@@ -47,3 +47,11 @@ npm install
 <pre><code>
 npm start
 </code></pre>
+
+# How we used Qiskit
+
+We used Qiskit to simulate the qubits transmitted from Alice to Bob through the "Quantum Channel" visible in our UI. More specifically, we created QuantumCircuit objects which contained quantum bits. These qubits were then modified using Pauli-X and Hadamard gates. They were also measured into classical bit registers. While we used a simulator to run our circuits, they are also compatible with real IBM quantum computers.
+
+# What we learned
+
+Through this project, we learned the basics of quantum computing, such as creating qubits, using quantum gates, and performing measurments with different bases. Additionally, we gained a better understanding of quantum cryptography and private key encryption. Finally, this project boosted our knowledge of the mathematical representations of qubits and the ways in which they can be manupulated using linear algebra.
