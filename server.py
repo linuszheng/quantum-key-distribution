@@ -27,9 +27,9 @@ def randomBitstring(n):
 def qubitString(a,b):
 	if a=="0" and b=="0":
 		return "0"
-	elif a=="0" and b=="1":
-		return "1"
 	elif a=="1" and b=="0":
+		return "1"
+	elif a=="0" and b=="1":
 		return "+"
 	elif a=="1" and b=="1":
 		return "-"
@@ -44,8 +44,10 @@ def qubitString(a,b):
 @app.route('/generateAlice/<int:n>')
 def generateAlice(n):
 	# global qubits
-	a = randomBitstring(n)
-	b = randomBitstring(n)
+	# a = randomBitstring(n)
+	# b = randomBitstring(n)
+	a = "11111"
+	b = "00111"
 	qubits = [""]*n
 	for i in range(n):
 		q = QuantumCircuit(1,1)
@@ -70,7 +72,8 @@ def generateAlice(n):
 @app.route('/measureQubit/<int:index>/<int:basis>')
 def measureQubit(index, basis):
 	q = circuits[index]
-	print(q)
+	print("CIRCUIT #"+str(index))
+	print("basis "+str(basis))
 	if basis==1:
 		q.h(0)
 	
@@ -82,9 +85,9 @@ def measureQubit(index, basis):
 		q.h(0)
 
 
-	print(q)
 	#run one simulation to measure
 	result = sim.run(q, shots=1, memory=True).result()
+	print(sim.run(q, shots=100).result().get_counts())
 	memory = result.get_memory(q)[0]
 	print(memory)
 	
@@ -102,6 +105,7 @@ def measureBob(n):
 	for i in range(n):
 		q = circuits[i]
 		result[i]=measureQubit(i, int(b2[i]))
+		print(result[i])
 
 	print(result)
 
@@ -127,5 +131,6 @@ def drop(indices, a, a2):
 
 #ind = [0,1]
 #print(drop(ind,"aa","bb"))
-#generateAlice(5)
-#measureBob(5)
+generateAlice(5)
+measureBob(5)
+measureBob(5)
