@@ -24,16 +24,14 @@ def randomBitstring(n):
 	return bitstring
 	
 #assigns string value (0,1,+,-) to qubit
-def qubitString(vector):
-	x = vector[0].real
-	y = vector[1].real
-	if x==1 and y==0:
+def qubitString(a,b):
+	if a=="0" and b=="0":
 		return "0"
-	elif x==0 and y==1:
+	elif a=="0" and b=="1":
 		return "1"
-	elif y>0:
+	elif a=="1" and b=="0":
 		return "+"
-	elif y<0:
+	elif a=="1" and b=="1":
 		return "-"
 	return
 
@@ -57,11 +55,7 @@ def generateAlice(n):
 			q.x(0)
 		if(int(b[i])==1):
 			q.h(0)
-		#from measurment tutorial
-		q.save_statevector()
-		result = sim.run(q).result()
-		vector = result.get_statevector()
-		qubits[i] = qubitString(vector)
+		qubits[i] = qubitString(a[i],b[i])
 	# print(a)
 	# print(b)
 	# print(qubits)
@@ -117,5 +111,6 @@ def sendBases(isBob):
 # drop the list of indices from the state
 def drop(indices):
 	pass
+
 
 
