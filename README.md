@@ -1,10 +1,7 @@
 # Project Overview
-QUANTUM KEY DISTRIBUTION
 
-IDEA PITCH:
-Visual demonstration of how quantum key distribution (BB84 protocol) works through a live and interactive simulation.
+Our project is a visual demonstration of how quantum key distribution (BB84 protocol) works through a live and interactive simulation.
 
-IDEA DESCRIPTION:
 	A major challenge of symmetric cryptographic schemes is safely selecting and communicating a shared "key". Our project illustrates how Quantum Computing allows us to implement secure key distribution protocols by taking advantage of qubits' tendency to "collapse" if observed by an unauthorized third agent. Our project walks through the entirety of this process, from the generation of the initial bitstrings to the final validation step. Each of these stages is also visialized through an intuitive real-time user interface.
 	
 A great feature of our interactive system is users' ability to choose to play as one of three entities: Alice who generates the key, Bob who receives it, and Eve who attempts to "eavesdrop" and acquire the key without being detected. By choosing the length of the key or selecting which qubits Eve should try to measure, players can discover the protocol's strengths and vulnerabilities under different conditions in a fun and engaging way.
