@@ -1,45 +1,77 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import io from "socket.io-client";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Alice from "./Alice";
+import Eve from "./Eve";
+import Bob from "./Bob";
+import styled from "@emotion/styled";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import { Typography } from "@mui/material";
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      socket: io("http://localhost:5000"),
-    };
-    this.setSocketListeners = this.setSocketListeners.bind(this);
-  }
+const App = () => {
+  const socket = io("http://localhost:5000");
+  window.socket = socket;
+  useEffect(() => {
+    setSocketListeners();
+  }, []);
 
-  componentDidMount() {
-    console.log("componentDidMount");
-    this.setSocketListeners();
-  }
-
-  setSocketListeners() {
-    this.state.socket.on("connect", () => {
-      console.log("Websocket connected: " + this.state.socket.connected);
+  const setSocketListeners = () => {
+    socket.on("connect", () => {
+      console.log("Websocket connected: " + socket.connected);
     });
 
-    this.state.socket.on("custom-server-msg", (data) => {
+    socket.on("custom-server-msg", (data) => {
       console.log("Data received: " + data.data);
     });
-  }
+  };
 
-  render() {
-    return (
-      <div className="App">
-        <h1>Websocket Testing..check console</h1>
-        <button
-          onClick={() => {
-            this.state.socket.emit("message", "hey");
-            console.log("hey");
+  const outerTheme = createTheme({
+    palette: {
+      mode: "dark",
+    },
+  });
+
+  return (
+    <Router>
+      <ThemeProvider theme={outerTheme}>
+        {/* <Background></Background> */}
+        <Box
+          sx={{
+            display: "flex",
+            width: "100%",
+            height: "100vh",
+            bgcolor: "background.default",
           }}
         >
-          Hey
-        </button>
-      </div>
-    );
-  }
-}
+          <Typography
+            variant="h3"
+            color="text.primary"
+            fontWeight="bold"
+            sx={{ textAlign: "center", margin: "auto" }}
+          >
+            Choose a Role
+          </Typography>
+        </Box>
+
+        <Switch>
+          <Route path="/alice">
+            <Alice />
+          </Route>
+          <Route path="/bob">
+            <Bob />
+          </Route>
+          <Route path="/eve">
+            <Eve />
+          </Route>
+        </Switch>
+      </ThemeProvider>
+    </Router>
+  );
+};
+
+const Background = styled.div`
+  background-color: black;
+`;
 
 export default App;
