@@ -42,5 +42,30 @@ def initializeCircuit(size):
 	measureHadamard(3)
 	return getResults(qc)
 
+# APIS to implement
+
+# input: n
+# return a, b as strings, and qubits are an array of strings
+# generates a, b as random bit strings of length n, from which it generates the qubits
+def generateAlice(n):
+    pass
+
+# index: the qubit to measure, basis: 0 for 0, 1, 1 for + , -
+# measures the qubit, returns the result as a string. 
+def measureQubit(index, basis):
+    pass
+
+# first randomly generate b', then measures all the qubits.
+# return b' as string, measurement outcome as array of strings.
+def measureBob(): 
+    pass
+
+
+def sendBases(isBob):
+    pass
+
+# drop the list of indices from the state
+def drop(indices):
+    pass
 
 
