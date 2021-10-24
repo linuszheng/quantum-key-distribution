@@ -2,6 +2,7 @@ from flask import Flask
 # Needed for localhost testing.
 from flask_cors import CORS, cross_origin
 from flask_socketio import SocketIO, emit
+from quantum import *
 
 app = Flask(__name__)
 
@@ -26,6 +27,21 @@ def test_message(data):
     emit('custom-server-msg',
          {'data': data})
 
+@socket.on('generateAlice')
+def createAliceQubits(n):
+	emit('qubitsGenerated',generateAlice(n))
+
+@socket.on('measureEve')
+def measureQubitEve(index, basis):
+	emit("qubitMeasured", measureQubit(index, basis))
+
+@socket.on('measureBob')
+def measureAllBob():
+	emit("qubitsMeasured", measureBob())
+
+@socket.on('dropIndices')
+def dropIndices(indices, a, a2):
+	emit("newValues", drop(indices, a, a2))
 
 if __name__ == '__main__':
     print("Starting websocket server")
