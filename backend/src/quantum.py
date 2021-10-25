@@ -109,12 +109,8 @@ def sendBases(isBob):
 	pass
 
 # drop the list of indices from the state
-def drop(indices, a, a2):
-	for i in reversed(range(0,len(a))):
+def drop(indices, s):
+	for i in reversed(range(0,len(s))):
 		if i in indices:
-			a = a[0:i]+a[i+1:]
-			a2 = a2[0:i]+a2[i+1:]
-	return {
-		"a": a, 
-		"a2": a2
-	}
+			s = s[0:i]+s[i+1:]
+	return s

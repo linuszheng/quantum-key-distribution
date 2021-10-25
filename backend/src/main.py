@@ -43,8 +43,8 @@ def measureAllBob(n):
 	emit("qubitsMeasured", measureBob(n))
 
 @socket.on('dropIndices')
-def dropIndices(indices, a, a2):
-	emit("newValues", drop(indices, a, a2))
+def dropIndices(indices, s):
+	emit("newValues", drop(indices, a))
 
 if __name__ == '__main__':
     print("Starting websocket server")
