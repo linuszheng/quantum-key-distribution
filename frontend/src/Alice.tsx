@@ -116,7 +116,7 @@ const Alice = () => {
               }}
               onClick={() => {}}
             >
-              Send
+              Send Qubits
             </Button>
             <Button
               variant="contained"
