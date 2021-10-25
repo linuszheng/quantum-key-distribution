@@ -33,6 +33,8 @@ const Bob = () => {
     "+",
   ]);
 
+  const [bString, setBString] = useState("100100111");
+
 
   const setSocketListeners = () => {
     socket.on("connect", () => {
@@ -41,6 +43,7 @@ const Bob = () => {
 
     socket.on("qubitsGenerated", (data: any) => {
       // create string of unknown (question mark) qubit values
+      console.log("received qubitsGenerated: "+data.qubits);
       setQubits(data.qubits);
     });
     socket.on("qubitsMeasured", (data: any) => {
@@ -48,6 +51,8 @@ const Bob = () => {
       console.log(data.result);
       // send b2 over classical channel??
       console.log(data.b2);
+      setBString(data.b2);
+      setQubits(data.result);
     });
   };
 
@@ -129,7 +134,7 @@ const Bob = () => {
               fontSize: "1.4rem",
             }}
           >
-            a = 10001010101010
+            {bString}
           </div>
         </ChannelContainer>
         <ChannelContainer>
