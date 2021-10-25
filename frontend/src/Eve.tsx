@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {
   Box,
+  Button,
   Card,
   createTheme,
   ThemeProvider,
@@ -79,6 +80,7 @@ const Eve = () => {
               alignItems: "center",
               justifyContent: "center",
               marginTop: "1rem",
+              fontSize: "1.4rem",
             }}
           >
             a = 10001010101010

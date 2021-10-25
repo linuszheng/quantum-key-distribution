@@ -27,7 +27,7 @@ const QuantumState = ({
             }}
           ></Qubit>
         ))}
-        <Right />
+        <RightBracket />
       </div>
 
       <ChooseBasis
@@ -68,6 +68,10 @@ const LeftBar = styled("div")(({ theme: { palette } }) => ({
   height: "5rem",
   backgroundColor: palette.primary.main,
   marginRight: "1rem",
+}));
+
+const RightBracket = styled(Right)(({ theme }) => ({
+  color: theme.palette.primary.main,
 }));
 
 // const RightBracket =

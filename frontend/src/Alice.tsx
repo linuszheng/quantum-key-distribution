@@ -5,6 +5,7 @@ import {
   createTheme,
   ThemeProvider,
   Typography,
+  Button,
 } from "@mui/material";
 import { styled } from "@mui/system";
 import QuantumState from "./QuantumState";
@@ -56,8 +57,8 @@ const Alice = () => {
   const aliceTheme = createTheme({
     palette: {
       primary: {
-        light: "#8E05C2",
-        main: "#a58685",
+        light: "#A2416B",
+        main: "#FF7777",
         dark: "#852747",
       },
       mode: "dark",
@@ -75,12 +76,67 @@ const Alice = () => {
           boxSizing: "border-box",
         }}
       >
-        <Typography variant="h2" color="primary.light" fontWeight="800">
-          👧 Alice
-        </Typography>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <Typography variant="h2" color="primary.light" fontWeight="800">
+            👧 Alice
+          </Typography>
+          <Buttons>
+            <Button
+              variant="contained"
+              sx={{ color: "white", textTransform: "none", fontWeight: 700 }}
+            >
+              Generate Alice's qubits
+            </Button>
+            <Button
+              variant="contained"
+              sx={{
+                color: "white",
+                textTransform: "none",
+                fontWeight: 700,
+                marginLeft: "1rem",
+              }}
+            >
+              Send
+            </Button>
+            <Button
+              variant="contained"
+              sx={{
+                color: "white",
+                textTransform: "none",
+                fontWeight: 700,
+                marginLeft: "1rem",
+              }}
+            >
+              Drop
+            </Button>
+          </Buttons>
+        </div>
+
         <ChannelContainer>
           <Typography variant="h6" color="text.main" fontWeight="600">
-            Quantum Channel
+            Classical State
+          </Typography>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              marginTop: "1rem",
+              fontSize: "1.4rem",
+            }}
+          >
+            a = 10001010101010
+          </div>
+        </ChannelContainer>
+        <ChannelContainer>
+          <Typography variant="h6" color="text.main" fontWeight="600">
+            Quantum State
           </Typography>
           <div
             style={{
@@ -93,22 +149,7 @@ const Alice = () => {
             <QuantumState state={qubits} showQubit={(idx) => {}} />
           </div>
         </ChannelContainer>
-        <ChannelContainer>
-          <Typography variant="h6" color="text.main" fontWeight="600">
-            Classical Channel
-          </Typography>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              marginTop: "1rem",
-            }}
-          >
-            a = 10001010101010
-          </div>
-        </ChannelContainer>
-        <button
+        {/* <button
           onClick={() => {
             socket.emit("generateAlice", 5);
             socket.emit("measureEve", 2, 0);
@@ -116,7 +157,7 @@ const Alice = () => {
           }}
         >
           Generate Alice Qubits
-        </button>
+        </button> */}
       </Box>
     </ThemeProvider>
   );
@@ -126,6 +167,11 @@ const ChannelContainer = styled(Card)(({ theme }) => ({
   margin: "5rem 3rem",
   borderRadius: "2rem",
   padding: "2rem",
+}));
+const Buttons = styled("div")(({ theme }) => ({
+  display: "flex",
+  // marginTop: "3rem",
+  // marginLeft: "3rem",
 }));
 
 export default Alice;
