@@ -24,22 +24,7 @@ const Alice = () => {
   const [a, setA] = useState("");
   const [b, setB] = useState("");
   const [b2, setB2] = useState("");
-  const [qubit, setQubit] = useState([]);
-
-  const [qubits, setQubits] = useState([
-    "0",
-    "0",
-    "0",
-    "0",
-    "0",
-    "+",
-    "0",
-    "0",
-    "0",
-    "0",
-    "0",
-    "+",
-  ]);
+  const [qubit, setQubit] = useState<string[]>([]);
 
   const setSocketListeners = () => {
     socket.on("connect", () => {
@@ -65,7 +50,7 @@ const Alice = () => {
     });
 
     socket.on("bobBases", (data: any) => {
-      console.log(data)
+      console.log(data);
       setB2(data);
     });
   };
@@ -121,7 +106,7 @@ const Alice = () => {
                 marginLeft: "1rem",
               }}
               onClick={() => {
-                socket.emit("aliceBasesReport", b)
+                socket.emit("aliceBasesReport", b);
               }}
             >
               Send Qubits
@@ -135,25 +120,38 @@ const Alice = () => {
                 marginLeft: "1rem",
               }}
               onClick={() => {
-                var indices=[];
-                for(var i=0; i<b.length; i++){
-                  if(b[i]!=b2[i]){
+                var indices: number[] = [];
+                for (var i = 0; i < b.length; i++) {
+                  if (b[i] != b2[i]) {
                     indices.push(i);
                   }
                 }
                 console.log(indices);
-                var i=0;
-                var tempA = "";
-                while (indices.length>0) {
-                  var index = indices.pop() || 0;
-                  if (index+1<a.length){
-                    tempA = a.slice(0,index)+a.slice(index+1);
-                  } else {
-                    tempA = a.slice(0,index);
+                let new_a = "";
+                for (var i = 0; i < a.length; i++) {
+                  if (!indices.includes(i)) {
+                    new_a += a.charAt(i);
                   }
                 }
-                console.log(tempA);
-                setA(tempA);
+                // var i=0;
+                // var tempA = "";
+                // while (indices.length>0) {
+                //   var index = indices.pop() || 0;
+                //   if (index+1<a.length){
+                //     tempA = a.slice(0,index)+a.slice(index+1);
+                //   } else {
+                //     tempA = a.slice(0,index);
+                //   }
+                // }
+                // console.log(tempA);
+                setA(new_a);
+                let newQubits: string[] = [];
+                qubit.forEach((letter, index) => {
+                  if (!indices.includes(index)) {
+                    newQubits.push(letter + "");
+                  }
+                });
+                setQubit(newQubits);
               }}
             >
               Drop
