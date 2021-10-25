@@ -6,6 +6,7 @@ import {
   ThemeProvider,
   Typography,
   Button,
+  TextField,
 } from "@mui/material";
 import { styled } from "@mui/system";
 import QuantumState from "./QuantumState";
@@ -17,6 +18,8 @@ const Alice = () => {
   useEffect(() => {
     setSocketListeners();
   }, []);
+
+  const [n, setN] = useState(5);
 
   const [qubits, setQubits] = useState([
     "0",
@@ -120,6 +123,12 @@ const Alice = () => {
 
         <ChannelContainer>
           <Typography variant="h6" color="text.main" fontWeight="600">
+            Enter n, the length of the randomly generated classical bit strings:
+          </Typography>
+          <TextField label="n" variant="standard" />
+        </ChannelContainer>
+        <ChannelContainer>
+          <Typography variant="h6" color="text.main" fontWeight="600">
             Classical State
           </Typography>
           <div
@@ -155,7 +164,7 @@ const Alice = () => {
 };
 const ChannelContainer = styled(Card)(({ theme }) => ({
   backgroundColor: theme.palette.primary.dark,
-  margin: "5rem 3rem",
+  margin: "3rem 2rem",
   borderRadius: "2rem",
   padding: "2rem",
 }));
