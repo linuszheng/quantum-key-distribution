@@ -1,5 +1,7 @@
 # Project Overview
 
+https://clipchamp.com/watch/7NuLBKUD2G0
+
 Our project is a visual demonstration of how quantum key distribution (BB84 protocol) works through a live and interactive simulation.
 
 A major challenge of symmetric cryptographic schemes is safely selecting and communicating a shared "key". Our project illustrates how Quantum Computing allows us to implement secure key distribution protocols by taking advantage of qubits' tendency to "collapse" if observed by an unauthorized third agent. Our project walks through the entirety of this process, from the generation of the initial bitstrings to the final validation step. Each of these stages is also visualized through an intuitive, real-time user interface.
