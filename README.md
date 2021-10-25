@@ -10,9 +10,6 @@ In addition to demonstrating the functionality of the BB84 key distribution prot
 
 # Directions
 
-I struggled with a minimal example that bootstraps a WebSocket connection
-between a React client and a Flask backend.
-
 ## Running the backend
 
 ### Only required for the first time
