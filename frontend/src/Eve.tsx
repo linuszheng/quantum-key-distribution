@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Button,
@@ -14,23 +14,21 @@ const Eve = () => {
   // @ts-ignore
   const socket = window.socket;
 
+  useEffect(() => {
+    setSocketListeners();
+  }, []);
+
   const [state, setState] = useState([
-    "0",
-    "0",
-    "0",
-    "0",
-    "0",
-    "+",
-    "0",
-    "0",
-    "0",
-    "0",
-    "0",
-    "+",
+    "X",
   ]);
   const setSocketListeners = () => {
     socket.on("connect", () => {
       console.log("Websocket connected: " + socket.connected);
+    });
+
+    socket.on("qubitsGenerated", (data: any) => {
+      console.log("received qubitsGenerated: "+data.qubits);
+      setQubits(data.qubits);
     });
 
     socket.on("qubitMeasured", (data: any) => {
