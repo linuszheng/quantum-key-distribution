@@ -42,7 +42,6 @@ const Alice = () => {
       console.log("a: " + data.a);
       console.log("b: " + data.b);
       console.log("qubits: " + data.qubits);
-      
     });
 
     socket.on("qubitMeasured", (data: any) => {
@@ -150,15 +149,6 @@ const Alice = () => {
             <QuantumState state={qubits} showQubit={(idx) => {}} />
           </div>
         </ChannelContainer>
-        {/* <button
-          onClick={() => {
-            socket.emit("generateAlice", 5);
-            socket.emit("measureEve", 2, 0);
-            socket.emit("measureBob", 5);
-          }}
-        >
-          Generate Alice Qubits
-        </button> */}
       </Box>
     </ThemeProvider>
   );
