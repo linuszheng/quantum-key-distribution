@@ -109,7 +109,7 @@ const Bob = () => {
                 fontWeight: 700,
                 marginLeft: "1rem",
               }}
-              onClick={() => {socket.emit("measureBob", qubits.length); console.log("SFDJLK");}}
+              onClick={() => socket.emit("measureBob", qubits.length)}
             >
               Measure
             </Button>
