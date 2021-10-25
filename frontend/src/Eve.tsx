@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Card,
@@ -10,6 +10,21 @@ import { styled } from "@mui/system";
 import QuantumState from "./QuantumState";
 
 const Eve = () => {
+  const [state, setState] = useState([
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "+",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "+",
+  ]);
+  const [qubits, setQubits] = useState(state.map((letter) => "?"));
   const eveTheme = createTheme({
     palette: {
       primary: {
@@ -20,6 +35,11 @@ const Eve = () => {
       mode: "dark",
     },
   });
+  const showQubit = (idx: number) => {
+    setQubits(
+      qubits.map((letter, index) => (idx === index ? state[idx] : letter))
+    );
+  };
   return (
     <ThemeProvider theme={eveTheme}>
       <Box
@@ -46,22 +66,22 @@ const Eve = () => {
               marginTop: "1rem",
             }}
           >
-            <QuantumState
-              state={[
-                "?",
-                "?",
-                "?",
-                "?",
-                "?",
-                "+",
-                "?",
-                "?",
-                "?",
-                "?",
-                "?",
-                "+",
-              ]}
-            />
+            <QuantumState state={qubits} showQubit={showQubit} />
+          </div>
+        </ChannelContainer>
+        <ChannelContainer>
+          <Typography variant="h6" color="text.main" fontWeight="600">
+            Classical Channel
+          </Typography>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              marginTop: "1rem",
+            }}
+          >
+            a = 10001010101010
           </div>
         </ChannelContainer>
       </Box>

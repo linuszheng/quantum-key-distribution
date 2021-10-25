@@ -22,7 +22,7 @@ const Alice = () => {
       <button
         onClick={() => {
           // @ts-ignore
-          window.socket.emit("messsage", "hey");
+          window.socket.emit("message", "hey");
         }}
       ></button>
     </div>
