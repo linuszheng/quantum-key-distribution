@@ -29,6 +29,7 @@ def qubitString(a,b):
 
 def generateQubits(n, a, b):
 	qubits = [""]*n
+	global circuits
 	circuits = []
 	for i in range(n):
 		q = QuantumCircuit(1,1)
