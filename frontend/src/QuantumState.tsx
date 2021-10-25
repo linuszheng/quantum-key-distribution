@@ -27,7 +27,7 @@ const QuantumState = ({
             }}
           ></Qubit>
         ))}
-        <Right />
+        <RightBracket />
       </div>
 
       <ChooseBasis
@@ -37,6 +37,8 @@ const QuantumState = ({
         }}
         measure={(basis: number) => {
           console.log("measure", basis, selectedQubit);
+          // @ts-ignore
+          window.socket.emit("measureEve", selectedQubit, basis);
           showQubit(selectedQubit);
         }}
       />
@@ -68,6 +70,10 @@ const LeftBar = styled("div")(({ theme: { palette } }) => ({
   height: "5rem",
   backgroundColor: palette.primary.main,
   marginRight: "1rem",
+}));
+
+const RightBracket = styled(Right)(({ theme }) => ({
+  color: theme.palette.primary.main,
 }));
 
 // const RightBracket =
