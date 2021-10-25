@@ -33,7 +33,10 @@ def createAliceQubits(n):
 
 @socket.on('measureEve')
 def measureQubitEve(index, basis):
-	emit("qubitMeasured", measureQubit(index, basis))
+	emit("qubitMeasured", {
+        "index": index,
+        "value": measureQubit(index, basis),
+    })
 
 @socket.on('measureBob')
 def measureAllBob(n):
