@@ -27,10 +27,6 @@ const Alice = () => {
   const [qubit, setQubit] = useState<string[]>([]);
 
   const setSocketListeners = () => {
-    socket.on("connect", () => {
-      console.log("Websocket connected: " + socket.connected);
-    });
-
     socket.on("qubitsGenerated", (data: any) => {
       console.log("a: " + data.a);
       console.log("b: " + data.b);

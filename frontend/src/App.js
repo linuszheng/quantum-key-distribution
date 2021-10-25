@@ -14,7 +14,7 @@ import { CardActionArea } from "@mui/material";
 import { css, jsx } from "@emotion/react";
 
 const App = () => {
-  const socket = io("http://c4c6-128-62-34-246.ngrok.io");
+  const socket = io("https://1270-128-62-34-246.ngrok.io");
   window.socket = socket;
   useEffect(() => {
     setSocketListeners();
@@ -23,10 +23,6 @@ const App = () => {
   const setSocketListeners = () => {
     socket.on("connect", () => {
       console.log("Websocket connected: " + socket.connected);
-    });
-
-    socket.on("custom-server-msg", (data) => {
-      console.log("Data received: " + data.data);
     });
   };
 

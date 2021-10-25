@@ -18,24 +18,18 @@ const Bob = () => {
     setSocketListeners();
   }, []);
 
-
-  const [qubits, setQubits] = useState([
-    ""
-  ]);
+  const [qubits, setQubits] = useState([""]);
 
   const [bString, setBString] = useState("");
   const [b, setB] = useState("");
 
   const setSocketListeners = () => {
-    socket.on("connect", () => {
-      console.log("Websocket connected: " + socket.connected);
-    });
-
     socket.on("qubitsGenerated", (data: any) => {
       // create string of unknown (question mark) qubit values
       console.log("received qubitsGenerated: " + data.qubits);
       setQubits(data.qubits);
     });
+
     socket.on("qubitsMeasured", (data: any) => {
       // reveal qubit values
       console.log(data.result);
@@ -44,6 +38,16 @@ const Bob = () => {
       setBString(data.b2);
       setQubits(data.result);
     });
+
+    socket.on("qubitMeasured", (data: any) => {
+      console.log("qubit measured", data);
+      setQubits((state) =>
+        state.map((letter, index) =>
+          index === data.index ? data.value : letter
+        )
+      );
+    });
+
     socket.on("aliceBases", (data: any) => {
       setB(data);
     });
@@ -85,8 +89,35 @@ const Bob = () => {
             <Button
               variant="contained"
               sx={{ color: "white", textTransform: "none", fontWeight: 700 }}
+              onClick={() => {
+                var indices: number[] = [];
+                for (var i = 0; i < b.length; i++) {
+                  if (b[i] != bString[i]) {
+                    indices.push(i);
+                  }
+                }
+                console.log(indices);
+                // var i=0;
+                // var tempA = "";
+                // while (indices.length>0) {
+                //   var index = indices.pop() || 0;
+                //   if (index+1<a.length){
+                //     tempA = a.slice(0,index)+a.slice(index+1);
+                //   } else {
+                //     tempA = a.slice(0,index);
+                //   }
+                // }
+                // console.log(tempA);
+                let newQubits: string[] = [];
+                qubits.forEach((letter, index) => {
+                  if (!indices.includes(index)) {
+                    newQubits.push(letter + "");
+                  }
+                });
+                setQubits(newQubits);
+              }}
             >
-              button x
+              Drop
             </Button>
             <Button
               variant="contained"
@@ -96,7 +127,7 @@ const Bob = () => {
                 fontWeight: 700,
                 marginLeft: "1rem",
               }}
-              onClick={()=>socket.emit("bobBasesReport", bString)}
+              onClick={() => socket.emit("bobBasesReport", bString)}
             >
               Send Bases
             </Button>
@@ -128,7 +159,8 @@ const Bob = () => {
               fontSize: "1.4rem",
             }}
           >
-            b1={b}<br></br>
+            b1={b}
+            <br></br>
             b2={bString}
           </div>
         </ChannelContainer>

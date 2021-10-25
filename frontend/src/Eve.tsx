@@ -24,10 +24,6 @@ const Eve = () => {
   const [measuredIndices, setMeasuredIndices] = useState({});
 
   const setSocketListeners = () => {
-    socket.on("connect", () => {
-      console.log("Websocket connected: " + socket.connected);
-    });
-
     socket.on("qubitsGenerated", (data: any) => {
       console.log("received qubitsGenerated: " + data.qubits);
       setState(data.qubits);
@@ -111,8 +107,8 @@ const Eve = () => {
               fontSize: "1.4rem",
             }}
           >
-            a = 10001010101010<br></br>
-            b1 = {b1}<br></br>
+            b1 = {b1}
+            <br></br>
             b2 = {b2}
           </div>
         </ChannelContainer>
