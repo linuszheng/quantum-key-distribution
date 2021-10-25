@@ -98,7 +98,7 @@ const Bob = () => {
               }}
               onClick={()=>socket.emit("bobBasesReport", bString)}
             >
-              Send
+              Send Bases
             </Button>
             <Button
               variant="contained"

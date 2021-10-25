@@ -19,6 +19,8 @@ const Eve = () => {
   }, []);
 
   const [state, setState] = useState([""]);
+  const [b1, setB1] = useState([""]);
+  const [b2, setB2] = useState([""]);
   const [measuredIndices, setMeasuredIndices] = useState({});
 
   const setSocketListeners = () => {
@@ -38,6 +40,12 @@ const Eve = () => {
           index === data.index ? data.value : letter
         )
       );
+    });
+    socket.on("aliceBases", (data: any) => {
+      setB1(data);
+    });
+    socket.on("bobBases", (data: any) => {
+      setB2(data);
     });
   };
 
@@ -103,7 +111,9 @@ const Eve = () => {
               fontSize: "1.4rem",
             }}
           >
-            a = 10001010101010
+            a = 10001010101010<br></br>
+            b1 = {b1}<br></br>
+            b2 = {b2}
           </div>
         </ChannelContainer>
       </Box>
