@@ -45,6 +45,7 @@ def measureQubits(n, b2):
 	for i in range(n):
 		q = circuits[i]
 		result[i]=measureQubit(i, int(b2[i]))
+
 	return result
 
 
@@ -73,6 +74,7 @@ def measureQubit(index, basis):
 	q = circuits[index]
 	print("CIRCUIT #"+str(index))
 	print("basis "+str(basis))
+	print("qubits", qubits, aString)
 	# Use Hadamard gate to flip to 0,1 basis so we can measure, then flip back
 	if basis==1:
 		q.h(0)
@@ -128,4 +130,9 @@ def getDifferentIndices(x,y):
 		if(x[i]!=y[i]):
 			indices.append(i)
 	return indices
+
+if __name__ == '__main__':
+	generateAlice(1)
+	print(measureQubit(0, 0))
+
 

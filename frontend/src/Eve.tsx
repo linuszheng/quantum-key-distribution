@@ -18,24 +18,29 @@ const Eve = () => {
     setSocketListeners();
   }, []);
 
-  const [state, setState] = useState([
-    "X",
-  ]);
+  const [state, setState] = useState([""]);
+  const [measuredIndices, setMeasuredIndices] = useState({});
+
   const setSocketListeners = () => {
     socket.on("connect", () => {
       console.log("Websocket connected: " + socket.connected);
     });
 
     socket.on("qubitsGenerated", (data: any) => {
-      console.log("received qubitsGenerated: "+data.qubits);
-      setQubits(data.qubits);
+      console.log("received qubitsGenerated: " + data.qubits);
+      setState(data.qubits);
     });
 
     socket.on("qubitMeasured", (data: any) => {
-      setState(state.map((letter, index) => index === data.index ? data.value :letter ))
+      console.log("qubit measured", data);
+      setState((state) =>
+        state.map((letter, index) =>
+          index === data.index ? data.value : letter
+        )
+      );
     });
   };
-  const [qubits, setQubits] = useState(state.map((letter) => "?"));
+
   const eveTheme = createTheme({
     palette: {
       primary: {
@@ -46,10 +51,9 @@ const Eve = () => {
       mode: "dark",
     },
   });
+
   const showQubit = (idx: number) => {
-    setQubits(
-      qubits.map((letter, index) => (idx === index ? state[idx] : letter))
-    );
+    setMeasuredIndices({ ...measuredIndices, [idx]: true });
   };
   return (
     <ThemeProvider theme={eveTheme}>
@@ -77,7 +81,13 @@ const Eve = () => {
               marginTop: "1rem",
             }}
           >
-            <QuantumState state={qubits} showQubit={showQubit} />
+            <QuantumState
+              state={state.map((letter, idx) =>
+                // @ts-ignore
+                measuredIndices[idx] ? letter : "?"
+              )}
+              showQubit={showQubit}
+            />
           </div>
         </ChannelContainer>
         <ChannelContainer>
