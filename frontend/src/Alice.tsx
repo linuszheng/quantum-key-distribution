@@ -109,7 +109,7 @@ const Alice = () => {
                 socket.emit("aliceBasesReport", b);
               }}
             >
-              Send Qubits
+              Send Bases
             </Button>
             <Button
               variant="contained"
