@@ -23,6 +23,7 @@ const Alice = () => {
 
   const [a, setA] = useState("");
   const [b, setB] = useState("");
+  const [b2, setB2] = useState("");
   const [qubit, setQubit] = useState([]);
 
   const [qubits, setQubits] = useState([
@@ -65,6 +66,7 @@ const Alice = () => {
 
     socket.on("bobBases", (data: any) => {
       console.log(data)
+      setB2(data);
     });
   };
 
@@ -118,7 +120,9 @@ const Alice = () => {
                 fontWeight: 700,
                 marginLeft: "1rem",
               }}
-              onClick={() => {}}
+              onClick={() => {
+                socket.emit("aliceBasesReport", b)
+              }}
             >
               Send Qubits
             </Button>
@@ -130,7 +134,27 @@ const Alice = () => {
                 fontWeight: 700,
                 marginLeft: "1rem",
               }}
-              onClick={() => {}}
+              onClick={() => {
+                var indices=[];
+                for(var i=0; i<b.length; i++){
+                  if(b[i]==b2[i]){
+                    indices.push(i);
+                  }
+                }
+                console.log(indices);
+                var i=0;
+                var tempA = "";
+                while (indices.length>0) {
+                  var index = indices.pop() || 0;
+                  if (index+1<a.length){
+                    tempA = a.slice(0,index)+a.slice(index+1);
+                  } else {
+                    tempA = a.slice(0,index);
+                  }
+                }
+                console.log(tempA);
+                setA(tempA);
+              }}
             >
               Drop
             </Button>
@@ -167,7 +191,8 @@ const Alice = () => {
             }}
           >
             <div>a={a}</div>
-            <div>b={b}</div>
+            <div>b1={b}</div>
+            <div>b2={b2}</div>
           </div>
         </ChannelContainer>
         <ChannelContainer>

@@ -20,21 +20,11 @@ const Bob = () => {
 
 
   const [qubits, setQubits] = useState([
-    "0",
-    "0",
-    "0",
-    "0",
-    "0",
-    "+",
-    "0",
-    "0",
-    "0",
-    "0",
-    "0",
-    "+",
+    ""
   ]);
 
-  const [bString, setBString] = useState("100100111");
+  const [bString, setBString] = useState("");
+  const [b, setB] = useState("");
 
   const setSocketListeners = () => {
     socket.on("connect", () => {
@@ -54,7 +44,9 @@ const Bob = () => {
       setBString(data.b2);
       setQubits(data.result);
     });
-    console.log("listeners attached");
+    socket.on("aliceBases", (data: any) => {
+      setB(data);
+    });
   };
 
   const bobTheme = createTheme({
@@ -136,7 +128,8 @@ const Bob = () => {
               fontSize: "1.4rem",
             }}
           >
-            {bString}
+            b1={b}<br></br>
+            b2={bString}
           </div>
         </ChannelContainer>
         <ChannelContainer>
