@@ -137,7 +137,7 @@ const Alice = () => {
               onClick={() => {
                 var indices=[];
                 for(var i=0; i<b.length; i++){
-                  if(b[i]==b2[i]){
+                  if(b[i]!=b2[i]){
                     indices.push(i);
                   }
                 }
