@@ -19,7 +19,7 @@ const Alice = () => {
     setSocketListeners();
   }, []);
 
-  const [n, setN] = useState(5);
+  const [n, setN] = useState("5");
 
   const [qubits, setQubits] = useState([
     "0",
@@ -125,7 +125,15 @@ const Alice = () => {
           <Typography variant="h6" color="text.main" fontWeight="600">
             Enter n, the length of the randomly generated classical bit strings:
           </Typography>
-          <TextField label="n" variant="standard" />
+          <TextField
+            label="n"
+            variant="standard"
+            value={n}
+            type="number"
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+              setN(event.target.value)
+            }
+          />
         </ChannelContainer>
         <ChannelContainer>
           <Typography variant="h6" color="text.main" fontWeight="600">
