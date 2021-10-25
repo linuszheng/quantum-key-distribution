@@ -36,8 +36,8 @@ def measureQubitEve(index, basis):
 	emit("qubitMeasured", measureQubit(index, basis))
 
 @socket.on('measureBob')
-def measureAllBob():
-	emit("qubitsMeasured", measureBob())
+def measureAllBob(n):
+	emit("qubitsMeasured", measureBob(n))
 
 @socket.on('dropIndices')
 def dropIndices(indices, a, a2):
