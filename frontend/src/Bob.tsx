@@ -39,18 +39,14 @@ const Bob = () => {
     });
 
     socket.on("qubitsGenerated", (data: any) => {
-      console.log("a: " + data.a);
-      console.log("b: " + data.b);
-      console.log("qubits: " + data.qubits);
+      // create string of unknown (question mark) qubit values
+      console.log(data.qubits);
     });
-
-    socket.on("qubitMeasured", (data: any) => {
-      console.log("eve measured: " + data);
-    });
-
     socket.on("qubitsMeasured", (data: any) => {
-      console.log("bob's bases: " + data.b2);
-      console.log("bob measured: " + data.result);
+      // reveal qubit values
+      console.log(data.result);
+      // send b2 over classical channel??
+      console.log(data.b2);
     });
   };
 
