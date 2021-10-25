@@ -114,3 +114,18 @@ def drop(indices, s):
 		if i in indices:
 			s = s[0:i]+s[i+1:]
 	return s
+	
+def chooseRandomIndices(n):
+	indices = []
+	for i in range(int(n)):
+		if(randint(0,1)==0):
+			indices.append(i)
+	return indices
+	
+def getDifferentIndices(x,y):
+	indices = []
+	for i in range(len(x)):
+		if(x[i]!=y[i]):
+			indices.append(i)
+	return indices
+
