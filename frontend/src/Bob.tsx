@@ -33,6 +33,7 @@ const Bob = () => {
     "+",
   ]);
 
+
   const setSocketListeners = () => {
     socket.on("connect", () => {
       console.log("Websocket connected: " + socket.connected);
@@ -40,7 +41,7 @@ const Bob = () => {
 
     socket.on("qubitsGenerated", (data: any) => {
       // create string of unknown (question mark) qubit values
-      console.log(data.qubits);
+      setQubits(data.qubits);
     });
     socket.on("qubitsMeasured", (data: any) => {
       // reveal qubit values
@@ -108,6 +109,7 @@ const Bob = () => {
                 fontWeight: 700,
                 marginLeft: "1rem",
               }}
+              onClick={() => {socket.emit("measureBob", qubits.length); console.log("SFDJLK");}}
             >
               Measure
             </Button>

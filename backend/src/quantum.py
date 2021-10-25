@@ -40,7 +40,7 @@ def generateQubits(n, a, b):
 		qubits[i] = qubitString(a[i],b[i])
 	return qubits
 
-def measureQubits(b2):
+def measureQubits(n, b2):
 	result=[""]*n
 	for i in range(n):
 		q = circuits[i]
@@ -98,7 +98,7 @@ def measureQubit(index, basis):
 def measureBob(n): 
 	b2 = randomBitstring(n)
 	print(b2)
-	result = measureQubits(b2)
+	result = measureQubits(n, b2)
 	return {
 		"b2": b2, 
 		"result": result
