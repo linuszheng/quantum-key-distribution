@@ -20,6 +20,10 @@ const Alice = () => {
   }, []);
 
   const [n, setN] = useState("5");
+  
+  const [a, setA] = useState("");
+  const [b, setB] = useState("");
+  const [qubit, setQubit] = useState([]);
 
   const [qubits, setQubits] = useState([
     "0",
@@ -45,6 +49,9 @@ const Alice = () => {
       console.log("a: " + data.a);
       console.log("b: " + data.b);
       console.log("qubits: " + data.qubits);
+      setA(data.a);
+      setB(data.b);
+      setQubit(data.qubits);
     });
 
     socket.on("qubitMeasured", (data: any) => {
@@ -93,6 +100,9 @@ const Alice = () => {
             <Button
               variant="contained"
               sx={{ color: "white", textTransform: "none", fontWeight: 700 }}
+              onClick={() => {
+      			socket.emit("generateAlice", Number(n));
+    		}}
             >
               Generate Alice's qubits
             </Button>
@@ -104,6 +114,8 @@ const Alice = () => {
                 fontWeight: 700,
                 marginLeft: "1rem",
               }}
+              onClick={() => {
+    		}}
             >
               Send
             </Button>
@@ -115,6 +127,8 @@ const Alice = () => {
                 fontWeight: 700,
                 marginLeft: "1rem",
               }}
+              onClick={() => {
+    		}}
             >
               Drop
             </Button>
@@ -146,9 +160,11 @@ const Alice = () => {
               justifyContent: "center",
               marginTop: "1rem",
               fontSize: "1.4rem",
+              whiteSpace: "pre-line"
             }}
           >
-            a = 10001010101010
+            a={a}
+            b={b}
           </div>
         </ChannelContainer>
         <ChannelContainer>
@@ -163,7 +179,7 @@ const Alice = () => {
               marginTop: "1rem",
             }}
           >
-            <QuantumState state={qubits} showQubit={(idx) => {}} />
+            <QuantumState state={qubit} showQubit={(idx) => {}} />
           </div>
         </ChannelContainer>
       </Box>
