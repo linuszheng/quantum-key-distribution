@@ -46,5 +46,13 @@ def measureAllBob(n):
 def dropIndices(indices, s):
 	emit("newValues", drop(indices, a), broadcast=True)
 
+@socket.on('bobBasesReport')
+def bobBasesBroadcast(bobBases):
+    emit("bobBases", bobBases, broadcast=True)
+
+@socket.on('aliceBasesReport')
+def bobBasesBroadcast(aliceBases):
+    emit("aliceBases", aliceBases, broadcast=True)
+
 if __name__ == '__main__':
     print("Starting websocket server")

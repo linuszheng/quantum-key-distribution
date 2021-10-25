@@ -62,6 +62,10 @@ const Alice = () => {
       console.log("bob's bases: " + data.b2);
       console.log("bob measured: " + data.result);
     });
+
+    socket.on("bobBases", (data: any) => {
+      console.log(data)
+    });
   };
 
   const aliceTheme = createTheme({

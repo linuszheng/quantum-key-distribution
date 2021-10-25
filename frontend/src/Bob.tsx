@@ -18,6 +18,7 @@ const Bob = () => {
     setSocketListeners();
   }, []);
 
+
   const [qubits, setQubits] = useState([
     "0",
     "0",
@@ -93,7 +94,7 @@ const Bob = () => {
               variant="contained"
               sx={{ color: "white", textTransform: "none", fontWeight: 700 }}
             >
-              Choose Bob's bases randomly
+              button x
             </Button>
             <Button
               variant="contained"
@@ -103,6 +104,7 @@ const Bob = () => {
                 fontWeight: 700,
                 marginLeft: "1rem",
               }}
+              onClick={()=>socket.emit("bobBasesReport", bString)}
             >
               Send
             </Button>
