@@ -14,7 +14,7 @@ import { CardActionArea } from "@mui/material";
 import { css, jsx } from "@emotion/react";
 
 const App = () => {
-  const socket = io("http://localhost:5000");
+  const socket = io("http://a98f-128-62-52-102.ngrok.io/");
   window.socket = socket;
   useEffect(() => {
     setSocketListeners();
