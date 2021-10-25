@@ -159,10 +159,11 @@ const Alice = () => {
               marginTop: "1rem",
               fontSize: "1.4rem",
               whiteSpace: "pre-line",
+              flexDirection: "column",
             }}
           >
-            a={a}
-            b={b}
+            <div>a={a}</div>
+            <div>b={b}</div>
           </div>
         </ChannelContainer>
         <ChannelContainer>

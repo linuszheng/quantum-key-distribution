@@ -29,22 +29,22 @@ def test_message(data):
 
 @socket.on('generateAlice')
 def createAliceQubits(n):
-	emit('qubitsGenerated',generateAlice(n))
+	emit('qubitsGenerated',generateAlice(n), broadcast=True)
 
 @socket.on('measureEve')
 def measureQubitEve(index, basis):
 	emit("qubitMeasured", {
         "index": index,
         "value": measureQubit(index, basis),
-    })
+    }, broadcast=True)
 
 @socket.on('measureBob')
 def measureAllBob(n):
-	emit("qubitsMeasured", measureBob(n))
+	emit("qubitsMeasured", measureBob(n), broadcast=True)
 
 @socket.on('dropIndices')
 def dropIndices(indices, s):
-	emit("newValues", drop(indices, a))
+	emit("newValues", drop(indices, a), broadcast=True)
 
 if __name__ == '__main__':
     print("Starting websocket server")

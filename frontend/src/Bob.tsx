@@ -33,7 +33,6 @@ const Bob = () => {
     "+",
   ]);
 
-
   const setSocketListeners = () => {
     socket.on("connect", () => {
       console.log("Websocket connected: " + socket.connected);
@@ -41,6 +40,7 @@ const Bob = () => {
 
     socket.on("qubitsGenerated", (data: any) => {
       // create string of unknown (question mark) qubit values
+      console.log("got qubits", data.qubits);
       setQubits(data.qubits);
     });
     socket.on("qubitsMeasured", (data: any) => {
@@ -49,6 +49,7 @@ const Bob = () => {
       // send b2 over classical channel??
       console.log(data.b2);
     });
+    console.log("listeners attached");
   };
 
   const bobTheme = createTheme({
