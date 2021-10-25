@@ -10,6 +10,9 @@ import { styled } from "@mui/system";
 import QuantumState from "./QuantumState";
 
 const Eve = () => {
+  // @ts-ignore
+  const socket = window.socket;
+
   const [state, setState] = useState([
     "0",
     "0",
@@ -24,6 +27,15 @@ const Eve = () => {
     "0",
     "+",
   ]);
+  const setSocketListeners = () => {
+    socket.on("connect", () => {
+      console.log("Websocket connected: " + socket.connected);
+    });
+
+    socket.on("qubitMeasured", (data: any) => {
+      setState(state.map((letter, index) => index === data.index ? data.value :letter ))
+    });
+  };
   const [qubits, setQubits] = useState(state.map((letter) => "?"));
   const eveTheme = createTheme({
     palette: {

@@ -37,6 +37,8 @@ const QuantumState = ({
         }}
         measure={(basis: number) => {
           console.log("measure", basis, selectedQubit);
+          // @ts-ignore
+          window.socket.emit("measureEve", selectedQubit, basis);
           showQubit(selectedQubit);
         }}
       />

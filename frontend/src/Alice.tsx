@@ -41,6 +41,7 @@ const Alice = () => {
       console.log("a: " + data.a);
       console.log("b: " + data.b);
       console.log("qubits: " + data.qubits);
+      
     });
 
     socket.on("qubitMeasured", (data: any) => {
