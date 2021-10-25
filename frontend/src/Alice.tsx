@@ -20,7 +20,7 @@ const Alice = () => {
   }, []);
 
   const [n, setN] = useState("5");
-  
+
   const [a, setA] = useState("");
   const [b, setB] = useState("");
   const [qubit, setQubit] = useState([]);
@@ -101,8 +101,8 @@ const Alice = () => {
               variant="contained"
               sx={{ color: "white", textTransform: "none", fontWeight: 700 }}
               onClick={() => {
-      			socket.emit("generateAlice", Number(n));
-    		}}
+                socket.emit("generateAlice", Number(n));
+              }}
             >
               Generate Alice's qubits
             </Button>
@@ -114,8 +114,7 @@ const Alice = () => {
                 fontWeight: 700,
                 marginLeft: "1rem",
               }}
-              onClick={() => {
-    		}}
+              onClick={() => {}}
             >
               Send
             </Button>
@@ -127,8 +126,7 @@ const Alice = () => {
                 fontWeight: 700,
                 marginLeft: "1rem",
               }}
-              onClick={() => {
-    		}}
+              onClick={() => {}}
             >
               Drop
             </Button>
@@ -160,7 +158,7 @@ const Alice = () => {
               justifyContent: "center",
               marginTop: "1rem",
               fontSize: "1.4rem",
-              whiteSpace: "pre-line"
+              whiteSpace: "pre-line",
             }}
           >
             a={a}
